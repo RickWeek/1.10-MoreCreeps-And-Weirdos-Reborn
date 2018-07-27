@@ -1,0 +1,102 @@
+#Other
+itemGroup.mcwtab=More Creeps And Weirdos Reborn
+
+
+#Items
+item.Blorpcola.name=Blorp Cola
+item.Bandaid.name=Band Aid
+item.EmpyJar.name=Baby Jar (Empty)
+item.FullJar.name=Baby Jar (Full)
+item.Ram16K.name=Ram 16K
+item.Battery.name=Battery
+item.EvilEgg.name=Evil Egg
+item.Money.name=Money
+item.Lolly.name=Lolly
+item.GooDonut.name=Goo Donut
+item.Donut.name=Donut
+item.Popsicle.name=Popsicle
+item.CavemanClub.name=Caveman's Club
+item.HealingGem.name=Healing Gem
+item.FireGem.name=Fire Gem
+item.EarthGem.name=Earth Gem
+item.MiningGem.name=Mining Gem
+item.SkyGem.name=Sky Gem
+item.LifeGem.name=Life Gem
+item.partBarf.name= 
+item.AtomPacket.name=Atom Packet
+item.ZebraHide.name=Zebra Hide
+item.RayGun.name=Ray Gun
+item.Gun.name=Gun
+item.Bullet.name=Bullet
+item.ArmSword.name=Arm Sword
+item.ArmorZebra.name=Zebra Helmet
+item.ArmyGem.name=Army Gem
+item.Extinguisher.name=Extinguisher
+item.Frisbee.name=Frisbee
+item.GrowRay.name=Grow Ray
+item.GemSword.name=Gem Sword
+item.GGPigRadio.name=GGPig Radio
+item.Limbs.name=Limbs
+item.Tombstone.name=Tombstone
+item.MoopsWorm.name=Moops Worm
+item.HorseHeadGem.name=HorseHead Gem
+item.MobilePhone.name=Mobile Phone
+item.ShrinkRay.name=Shrink Ray
+item.BabyFood.name=Baby Food
+item.Rocket.name=Rocket
+item.Bomb.name=Bomb
+item.BoomBox.name=Boom Box
+item.BullLeather.name=Bull Leather
+item.BullSteak.name=Bull Steak
+item.HardCandy.name=Hard Candy
+item.ChickenWing.name=Chicken Wing
+item.Cupcake.name=Cupcake
+item.Diodes.name=Diodes
+
+#Achievement
+item.aBubble.name= 
+item.aCamel.name= 
+item.aFloob.name= 
+item.aHell.name= 
+item.aHotDog.name= 
+item.aHotDog2.name= 
+item.aNonSwimmer.name= 
+item.aPig.name= 
+item.aPyramid.name= 
+
+#Entity
+entity.mcw.mummy.name=Mummy
+entity.mcw.lolliman.name=Lolliman
+entity.mcw.blorp.name=Blorp
+entity.mcw.bigbaby.name=Big Baby
+entity.mcw.rockmonster.name=Rock Monster
+entity.mcw.invisibleman.name=Invisible Man
+entity.mcw.robotted.name=Robot Ted
+entity.mcw.robottodd.name=Robot Todd
+entity.mcw.evillight.name=Evil Light
+entity.mcw.evilsnowman.name=Evil Snowman
+entity.mcw.evilpig.name=Evil Pig
+entity.mcw.evilcreature.name=Evil Creature
+entity.mcw.evilchicken.name=Evil Chicken
+entity.mcw.evilscientist.name=Evil Scientist
+entity.mcw.preacher.name=Preacher
+entity.mcw.prisoner.name=Prisoner
+entity.mcw.lawyerfromhell.name=Lawyer From Hell
+entity.mcw.ratman.name=Ratman
+entity.mcw.bum.name=Bum
+entity.mcw.castleguard.name=Castle Guard
+entity.mcw.thief.name=Thief
+entity.mcw.caveman.name=Caveman
+entity.mcw.digbug.name=Dig Bug
+entity.mcw.g.name=G
+entity.mcw.pyramidguardian.name=Pyramid Guardian
+entity.mcw.cameljockey.name=Camel Jockey
+entity.mcw.castlecritter.name=Castle Critter
+entity.mcw.hunchbackskeleton.name=Hunchback Skeleton
+entity.mcw.hunchback.name=Hunchback
+entity.mcw.schlump.name=Schlump
+entity.mcw.trophy.name=Trophy
+entity.mcw.atom.name=Atom
+entity.mcw.sneakysal.name=Sneaky Sal
+entity.mcw.bubblescum.name=Bubblescum
+
