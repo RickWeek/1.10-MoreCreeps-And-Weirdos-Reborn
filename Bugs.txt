@@ -1,0 +1,8 @@
+## LAWYER FROM HELL ##
+Spawn della prigione non nella posizione corretta, ovvero dove si trova il giocatore al momento della cattura
+
+## MUMMY - FINISHED ##
+Il modello deve avere le braccia alzate, come lo zombie ( Utilizzare il modello di esso )
+
+## DIGBUG ##
+Bug nel render delle antenne 
