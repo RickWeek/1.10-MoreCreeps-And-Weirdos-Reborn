@@ -6,3 +6,7 @@ Il modello deve avere le braccia alzate, come lo zombie ( Utilizzare il modello 
 
 ## DIGBUG ##
 Bug nel render delle antenne 
+
+## HUNCHBACK ##
+Gli scheletri spawnati dal "HUNCHBACK" non attaccano i mob.
+
