@@ -10,3 +10,5 @@ Bug nel render delle antenne
 ## HUNCHBACK ##
 Gli scheletri spawnati dal "HUNCHBACK" non attaccano i mob.
 
+## BLORP - FINISCHED ##
+
