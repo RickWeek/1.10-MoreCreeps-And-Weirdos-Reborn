@@ -26,7 +26,7 @@ Non fluttua in aria
 
 ## EVIL CHICKEN ##
 Non attacca il player
-Alla sua morte non lascia nessun drop (piume)
+Alla sua morte non lascia nessun drop (piume) FIXED
 
 ## EVIL PIG ##
 Non attacca il player
