@@ -25,12 +25,12 @@ public class EntityBigBabyAI extends EntityAIBase {
         EntityLivingBase entitylivingbase = this.bbaby.getAttackTarget();
         double d0 = this.bbaby.getDistanceSqToEntity(entitylivingbase);
 
-        if (d0 < 4.0D)
-        {
-            if (bbaby.attackTime <= 0)
-            {
+        if (d0 < 4.0D) {
+            if (bbaby.attackTime <= 0) {
             	bbaby.attackTime = 20;
+            	
                 this.bbaby.attackEntityAsMob(entitylivingbase);
+                
             }
             
             this.bbaby.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0D);

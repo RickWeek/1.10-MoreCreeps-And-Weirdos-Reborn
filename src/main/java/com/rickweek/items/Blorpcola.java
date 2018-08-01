@@ -30,7 +30,7 @@ public class Blorpcola extends Item {
         
         if(entityplayer.getHealth() < 20.0F) {
         	if(entityplayer instanceof EntityLivingBase)
-        		entityplayer.addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 1, 1));
+        		entityplayer.addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 1));
         	world.playSound((EntityPlayer) null, entityplayer.getPosition(), MCSoundEvents.ITEM_BLORPCOLA, SoundCategory.PLAYERS, 1.0F, 1.0F);
         	itemstack.stackSize--;
         }

@@ -1,5 +1,7 @@
 package com.rickweek.entities;
 
+import com.rickweek.init.MCItems;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

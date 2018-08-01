@@ -324,8 +324,10 @@ public class CREEPSEntityBum extends EntityMob
 
                     for (int k = 0; k < value; k++)
                     {
-                        dropItem(Item.getItemById(rand.nextInt(95)), 1);
-                        dropItem(Items.IRON_SHOVEL, 1);
+                    	if(!worldObj.isRemote) {
+	                        dropItem(Item.getItemById(rand.nextInt(95)), 1);
+	                        dropItem(Items.IRON_SHOVEL, 1);
+                    	}
                     }
 
                     return true;

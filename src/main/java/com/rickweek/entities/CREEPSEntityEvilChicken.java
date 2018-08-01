@@ -180,12 +180,14 @@ public class CREEPSEntityEvilChicken extends EntityMob
     {
         return SoundEvents.ENTITY_CHICKEN_DEATH;
     }
-
-    /**
-     * Returns the item ID for the item the mob drops on death.
-     */
-    protected Item getDropItem()
+    
+    public void onDeath(DamageSource damagesource)
     {
-        return Items.FEATHER;
+    	if(!worldObj.isRemote)
+    	{
+            dropItem(Items.FEATHER, 1);
+    	}
+        super.onDeath(damagesource);
     }
+    
 }
