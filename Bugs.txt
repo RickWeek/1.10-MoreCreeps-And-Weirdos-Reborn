@@ -2,8 +2,8 @@
 Spawn della prigione non nella posizione corretta, ovvero dove si trova il giocatore al momento della cattura
 
 ## MUMMY - FINISHED ##
-Il modello deve avere le braccia alzate, come lo zombie ( Utilizzare il modello di esso )
-Alla luce del sole non brucia
+Il modello deve avere le braccia alzate, come lo zombie ( Utilizzare il modello di esso ) FIXED
+Alla luce del sole non brucia FIXED
 
 ## DIGBUG ##
 Bug nel render delle antenne 
@@ -17,16 +17,12 @@ Non si attaccano a vicenda e non attaccano i mob vicini
 ## BIG BABY ##
 Non attacca il player automaticamente (distanza 4 blocchi), ma solo quando è attaccato.
 
-## ROCK MONSTER - OK ##
+## INVISIBLE MAN - OK ##
+Alla sua morte non droppa niente FIXED
 
-## INVISIBLE MAN ##
-Alla sua morte non droppa niente
-
-## ROBOT TED - OK ##
-
-## ROBOT TODD - OK ##
-
-## EVIL SNOWMAN - OK ##
+## ROBOT TED ##
+Particelle non esistenti al di sotto del mob
+Non fluttua in aria
 
 ## EVIL CHICKEN ##
 Non attacca il player
@@ -34,7 +30,13 @@ Alla sua morte non lascia nessun drop (piume)
 
 ## EVIL PIG ##
 Non attacca il player
-Alla sua morte non lascia nessun drop (porkchops)
 
 ## EVIL CREATURE ## 
 Quando attacca il player non lo fa saltare in aria
+
+## BUM ##
+Modello buggato, braccia incastrate nel corpo
+Resta immobile, non cammina
+Non droppa gli items
+Le particelle dell'urina non sono ancora pronte
+Suono sbagliato nell'interazione con gli oggetti queli Iron, Gold e Diamonds
