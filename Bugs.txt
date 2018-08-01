@@ -38,3 +38,5 @@ Alla sua morte non lascia nessun drop (porkchops)
 
 ## EVIL CREATURE ## 
 Quando attacca il player non lo fa saltare in aria
+
+ciao
