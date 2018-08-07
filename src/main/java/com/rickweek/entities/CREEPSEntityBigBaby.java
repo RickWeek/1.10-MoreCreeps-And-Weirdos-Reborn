@@ -44,7 +44,7 @@ public class CREEPSEntityBigBaby extends EntityMob
     public CREEPSEntityBigBaby(World world) {
         super(world);
         texture = new ResourceLocation(Reference.MODID, Reference.TEXTURE_PATH_ENTITES + Reference.TEXTURE_BIGBABY0);
-        setSize(width * 5.25F, height * 5.55F);
+        setSize(width * 3.25F, height * 3.55F);
         skinDirection = 1;
         skinTimer = 0;
         skin = 0;
@@ -174,7 +174,7 @@ public class CREEPSEntityBigBaby extends EntityMob
         else
         {
             return false;
-        }
+}
     }
 
     /**
@@ -277,10 +277,10 @@ public class CREEPSEntityBigBaby extends EntityMob
     {
     	if(!worldObj.isRemote)
     	{
-    		if(rand.nextInt(2) == 1)
-    			dropItem(Items.PORKCHOP, rand.nextInt(6) + 5);
+    		if(rand.nextInt(10) == 1)
+    			dropItem(Items.PORKCHOP, 1);
     		else
-    			dropItem(MCItems.BabyFood, rand.nextInt(2));
+    			dropItem(MCItems.BabyFood, rand.nextInt(2) + 1);
     	}
         super.onDeath(damagesource);
     }

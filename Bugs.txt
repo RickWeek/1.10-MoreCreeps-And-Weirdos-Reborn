@@ -15,7 +15,7 @@ Gli scheletri spawnati dal "HUNCHBACK" non attaccano i mob.
 Non si attaccano a vicenda e non attaccano i mob vicini
 
 ## BIG BABY ##
-Non attacca il player automaticamente (distanza 4 blocchi), ma solo quando Ã¨ attaccato.
+Non attacca il player automaticamente (distanza 4 blocchi), ma solo quando è attaccato.
 
 ## INVISIBLE MAN - OK ##
 Alla sua morte non droppa niente FIXED

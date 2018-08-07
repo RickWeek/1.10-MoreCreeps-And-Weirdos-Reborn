@@ -121,12 +121,10 @@ public class MobRegistry {
 	  // The registerEntityRenderingHandler have to change ASAP because this method is deprecated
 	  public static void registerRender() {
 		  RenderingRegistry.registerEntityRenderingHandler(CREEPSEntityMummy.class, new CREEPSRenderBabyMummy(Minecraft.getMinecraft().getRenderManager(), new CREEPSModelMummy(0.5F), 0.5F));
-		  // TODO RenderingRegistry.registerEntityRenderingHandler(CREEPSEntityBabyMummy.class, new CREEPSRenderBabyMummy(Minecraft.getMinecraft().getRenderManager(), new CREEPSModelMummy(0.5F), 0.5F));
 		  RenderingRegistry.registerEntityRenderingHandler(CREEPSEntityLolliman.class, new CREEPSRenderLolliman(Minecraft.getMinecraft().getRenderManager(), new CREEPSModelLolliman(0.5F), 0.5F));
 		  RenderingRegistry.registerEntityRenderingHandler(CREEPSEntityBlorp.class, new CREEPSRenderBlorp(Minecraft.getMinecraft().getRenderManager(), new CREEPSModelBlorp(0.5F), 0.5F));
 		  RenderingRegistry.registerEntityRenderingHandler(CREEPSEntityBigBaby.class, new CREEPSRenderBigBaby(Minecraft.getMinecraft().getRenderManager(), new CREEPSModelBigBaby(0.5F), 0.5F));
 		  RenderingRegistry.registerEntityRenderingHandler(CREEPSEntityRockMonster.class, new CREEPSRenderRockMonster(Minecraft.getMinecraft().getRenderManager(), new CREEPSModelRockMonster(0.5F), 0.5F));
-		  // RenderingRegistry.registerEntityRenderingHandler(CREEPSEntityInvisibleMan.class, new CREEPSRenderInvisibleMan(Minecraft.getMinecraft().getRenderManager(), new CREEPSModelMummy(0.5F), 0.5F));
 		  RenderingRegistry.registerEntityRenderingHandler(CREEPSEntityInvisibleMan.class, new CREEPSRenderInvisibleMan(Minecraft.getMinecraft().getRenderManager(), new ModelBiped(0.5F), 0.5F));
 		  RenderingRegistry.registerEntityRenderingHandler(CREEPSEntityRobotTed.class, new CREEPSRenderRobotTed(Minecraft.getMinecraft().getRenderManager(), new CREEPSModelRobotTed(0.5F), 0.5F));
 		  RenderingRegistry.registerEntityRenderingHandler(CREEPSEntityRobotTodd.class, new CREEPSRenderRobotTodd(Minecraft.getMinecraft().getRenderManager(), new CREEPSModelRobotTodd(0.5F), 0.5F));

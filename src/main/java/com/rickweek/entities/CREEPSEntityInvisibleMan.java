@@ -326,11 +326,12 @@ public class CREEPSEntityInvisibleMan extends EntityMob
 
     /**
      * Returns the item ID for the item the mob drops on death.
-     */
+     
     protected Item getDropItem()
     {
         return dropItems[rand.nextInt(dropItems.length)];
-    }
+    } 
+     */
 
     static
     {
@@ -344,6 +345,13 @@ public class CREEPSEntityInvisibleMan extends EntityMob
                 });
     }
    
+    public void onDeath(DamageSource damagesource)
+    {
+    	if(!worldObj.isRemote)
+    		dropItem(dropItems[rand.nextInt(dropItems.length)], 1);
+    	super.onDeath(damagesource);
+    }
+    
     public boolean isAngry()
     {
         return this.angerLevel > 0;
