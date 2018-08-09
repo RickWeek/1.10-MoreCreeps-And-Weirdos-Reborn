@@ -41,5 +41,5 @@ Non droppa gli items
 Le particelle dell'urina non sono ancora pronte
 Suono sbagliato nell'interazione con gli oggetti queli Iron, Gold e Diamonds
 
-## Preancher - FINISHED ## 
-
+## Preacher  ## 
+Non muore nella lava

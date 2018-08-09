@@ -4,7 +4,7 @@ public class Reference {
 	
 	public static final String MODID = "mcw";
 	public static final String NAME = "MoreCreeps Reboot";
-	public static final String VERSION = "1.4.0";
+	public static final String VERSION = "Beta 1.17";
 	public static final String SERVER_PROXY_CLASS = "com.rickweek.main.proxies.CommonProxy";
 	public static final String CLIENT_PROXY_CLASS = "com.rickweek.main.proxies.ClientProxy";
 	

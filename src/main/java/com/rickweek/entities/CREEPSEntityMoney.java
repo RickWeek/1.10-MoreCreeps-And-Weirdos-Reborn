@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -177,11 +178,7 @@ public class CREEPSEntityMoney extends EntityThrowable
                 if (entity.canBeCollidedWith() && (entity instanceof CREEPSEntityPreacher))
                 {
                     EntityPlayer player = worldObj.getClosestPlayerToEntity(entity, 2D);
-                    
-                    if (player != null)
-                    {
-                        entity.attackEntityFrom(DamageSource.causeMobDamage(player), 10);
-                    }
+                    entity.attackEntityFrom(DamageSource.causeMobDamage(player), 10);
 
                     /* TODO
                     if (((EntityLiving)entity).getHealth() <= 0 && !((EntityPlayerMP)player).getStatFile().hasAchievementUnlocked(MoreCreepsAndWeirdos.achievefalseidol))

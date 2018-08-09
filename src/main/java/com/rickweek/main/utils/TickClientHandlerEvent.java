@@ -49,7 +49,7 @@ public class TickClientHandlerEvent {
 
 			world.playSound((EntityPlayer) null, player.getPosition(), MCSoundEvents.Welcome, SoundCategory.PLAYERS, 1.0F, 1.0F);
 	        String randomMessage = welcome[world.rand.nextInt(welcome.length)];
-			player.addChatMessage(new TextComponentString("\2476More Creeps and Weirdos Reborn \247eVersion A0.2\2476loaded."));
+			player.addChatMessage(new TextComponentString("\2476More Creeps and Weirdos Reborn \247eVersion Beta 1.17\2476 loaded."));
 			player.addChatMessage(new TextComponentString(randomMessage));
 			
 		}

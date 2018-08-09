@@ -39,7 +39,6 @@ public class CREEPSEntityPreacher extends EntityMob
     private Entity victimEntity;
     public int raise;
     public boolean getvictim;
-    
     private float victimspeed;
     private int waittime;
     private int raiselevel;
@@ -47,8 +46,7 @@ public class CREEPSEntityPreacher extends EntityMob
     
     public String texture;
 
-    public CREEPSEntityPreacher(World world)
-    {
+    public CREEPSEntityPreacher(World world) {
         super(world);
         texture = "mcw:textures/entity/preacher0.png";
         angerLevel = 0;
@@ -68,38 +66,27 @@ public class CREEPSEntityPreacher extends EntityMob
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPig.class, true));
     }
     
-    public void applyEntityAttributes()
-    {
+    public void applyEntityAttributes() {
     	super.applyEntityAttributes();
-    	this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(75D);
+    	this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(55D);
     	this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000517232513D);
     	this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5D);
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
-    public void onUpdate()
-    {
+    public void onUpdate() {
     	this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(this.getAttackTarget() != null ? 0.23000000617232513D : 0.23000000517232513D);
 
-        if (rand.nextInt(4) == 0)
-        {
+        if (rand.nextInt(4) == 0) {
             texture = (new StringBuilder()).append("mcw:textures/entity/preacher").append(String.valueOf(rand.nextInt(3))).append(".png").toString();
-        }
-
-        super.onUpdate();
-
-        if (isInLava())
-        {
+        } 
+        
+        if (isBurning()) {
             if (rand.nextInt(25) == 0)
-            {
-                // worldObj.playSoundAtEntity(this, "morecreeps:preacherburn", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
-                worldObj.playSound((EntityPlayer) null, getPosition(), MCSoundEvents.ENTITY_PREACHER_BURN, SoundCategory.NEUTRAL, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
-            }
-
-            setOnFireFromLava();
+            	 worldObj.playSound((EntityPlayer) null, getPosition(), MCSoundEvents.ENTITY_PREACHER_BURN, SoundCategory.NEUTRAL, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);            
         }
+        
+        super.onUpdate();
+        
     }
 
     /**
@@ -203,129 +190,65 @@ public class CREEPSEntityPreacher extends EntityMob
         super.onLivingUpdate();
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    public void writeEntityToNBT(NBTTagCompound nbttagcompound)
-    {
+
+    public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
         super.writeEntityToNBT(nbttagcompound);
         nbttagcompound.setShort("Anger", (short)angerLevel);
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    public void readEntityFromNBT(NBTTagCompound nbttagcompound)
-    {
+    public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
         super.readEntityFromNBT(nbttagcompound);
         angerLevel = nbttagcompound.getShort("Anger");
     }
 
-    /**
-     * Will return how many at most can spawn in a chunk at once.
-     */
-    public int getMaxSpawnedInChunk()
-    {
+    // Massimo numero di mob che possono spawnare in un chunk
+    public int getMaxSpawnedInChunk() {
         return 1;
     }
 
-    /**
-     * Called when the entity is attacked.
-     */
-    public boolean attackEntityFrom(DamageSource damagesource, float i)
-    {
-        Entity obj = damagesource.getEntity();
-
-        if (!handleWaterMovement())
-        {
-            // worldObj.playSoundAtEntity(this, "morecreeps:preacherhurt", 1.0F, 1.0F);
-            worldObj.playSound((EntityPlayer) null, getPosition(), MCSoundEvents.ENTITY_PREACHER_HURT, SoundCategory.NEUTRAL, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
-        }
-
-        /* 
-        if (getvictim && obj != null && !(obj instanceof CREEPSEntityRocket))
-        {
-            obj.motionX += rand.nextFloat() * 1.98F;
-            obj.motionY += rand.nextFloat() * 1.98F;
-            obj.motionZ += rand.nextFloat() * 1.98F;
-            return true;
-        }
-
-        if (obj != null && (obj instanceof CREEPSEntityRocket))
-        {
-            obj = worldObj.getClosestPlayerToEntity(this, 30D);
-
-            if ((obj != null) & (obj instanceof EntityPlayer))
-            {
-                //((Entity)(obj)).mountEntity(null);
-                getvictim = true;
-                victimEntity = ((Entity)(obj));
-                victimEntity.motionX = 0.0D;
-                victimEntity.motionY = 0.0D;
-                victimEntity.motionZ = 0.0D;
-                raiselevel = rand.nextInt(50) + 50;
-                // worldObj.playSoundAtEntity(this, "morecreeps:preacherraise", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F);
-                worldObj.playSound((EntityPlayer) null, getPosition(), MCSoundEvents.ENTITY_PREACHER_RAISE, SoundCategory.NEUTRAL, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+    // Richiamato quando il mob viene colpito
+    public boolean attackEntityFrom(DamageSource damagesource, float amount) {
+        Entity entity = damagesource.getEntity();
+        if (entity != null) {
+            if (amount < 1) 
+            		amount = 1;
+            
+            if ((entity instanceof CREEPSEntityMoney) || (entity instanceof CREEPSEntityBullet)) {
+            	amount = 2;
             }
-        } */
-
-        if (obj != null)
-        {
-            if (i < 1)
-            {
-                i = 1;
-            }
-
-            // TODO
-            /*
-            if ((obj instanceof CREEPSEntityGooDonut) || (obj instanceof CREEPSEntityRocket) || (obj instanceof CREEPSEntityBullet) || (obj instanceof CREEPSEntityRay))
-            {
-                i = 2;
-            } */
-
-            //wtf is that ?
-            //health = (health - rand.nextInt(i)) + 1;
+            
             raise = 1;
             waittime = 0;
             smoke();
             getvictim = true;
-            victimEntity = ((Entity)(obj));
+            victimEntity = ((Entity)(entity));
             victimEntity.motionX = 0.0D;
             victimEntity.motionY = 0.0D;
             victimEntity.motionZ = 0.0D;
             raiselevel = rand.nextInt(50) + 50;
-            // worldObj.playSoundAtEntity(this, "morecreeps:preacherraise", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F);
-            worldObj.playSound((EntityPlayer) null, getPosition(), MCSoundEvents.ENTITY_PREACHER_RAISE, SoundCategory.NEUTRAL, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+            worldObj.playSound((EntityPlayer) null, getPosition(), MCSoundEvents.ENTITY_PREACHER_RAISE, SoundCategory.NEUTRAL, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F);
         }
 
-        return true;
+        return super.attackEntityFrom(DamageSource.causeMobDamage(this), amount);
     }
 
-    /**
-     * knocks back this entity
-     */
-    public void knockBack(Entity entity, float i, double d, double d1)
-    {
+
+    public void knockBack(Entity entity, float i, double d, double d1) {
         motionX *= 1.5D;
         motionZ *= 1.5D;
         motionY += 0.5D;
     }
 
-    /**
-     * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
-     * (Animals, Spiders at day, peaceful PigZombies).
-     */
-    protected Entity findPlayerToAttack()
-    {
+    /* Cerca il giocatore piu vicino nel range di 16 blocchi, nel caso ritornasse NULL il mob sarebbe pacifico
+     *  (es. ragni di giorno, pigzombie se non attaccati)
+     */ 
+    protected Entity findPlayerToAttack() {
         return null;
     }
 
-    private void smoke()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            for (int j = 0; j < 2; j++)
-            {
+    private void smoke() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 2; j++) {
                 double d = rand.nextGaussian() * 0.02D;
                 double d1 = rand.nextGaussian() * 0.02D;
                 double d2 = rand.nextGaussian() * 0.02D;
@@ -341,12 +264,9 @@ public class CREEPSEntityPreacher extends EntityMob
         }
     }
 
-    private void smokevictim(Entity entity)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            for (int j = 0; j < 5; j++)
-            {
+    private void smokevictim(Entity entity) {
+        for (int i = 0; i < 4; i++)  {
+            for (int j = 0; j < 5; j++) {
                 double d = rand.nextGaussian() * 0.02D;
                 double d1 = rand.nextGaussian() * 0.02D;
                 double d2 = rand.nextGaussian() * 0.02D;
@@ -355,90 +275,43 @@ public class CREEPSEntityPreacher extends EntityMob
         }
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected SoundEvent getAmbientSound()
-    {
+    // Ritorna il danno riprodotto dal mob quando e vivo
+    protected SoundEvent getAmbientSound() {
         return MCSoundEvents.ENTITY_PREACHER;
     }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected SoundEvent getHurtSound()
-    {
+    // Ritorna il danno riprodotto dal mob quando viene colpito
+    protected SoundEvent getHurtSound() {
         return MCSoundEvents.ENTITY_PREACHER_HURT;
     }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected SoundEvent getDeathSound()
-    {
+    // Ritorna il danno riprodotto dal mob alla sua morte
+    protected SoundEvent getDeathSound() {
         return MCSoundEvents.ENTITY_PREACHER_DEATH;
     }
 
-    // TODO
-    /* 
-    public void confetti(EntityPlayer player)
-    {
-        double d = -MathHelper.sin((player.rotationYaw * (float)Math.PI) / 180F);
-        double d1 = MathHelper.cos((player.rotationYaw * (float)Math.PI) / 180F);
-        CREEPSEntityTrophy creepsentitytrophy = new CREEPSEntityTrophy(worldObj);
-        creepsentitytrophy.setLocationAndAngles(player.posX + d * 3D, player.posY - 2D, player.posZ + d1 * 3D, player.rotationYaw, 0.0F);
-        if(!worldObj.isRemote)
-        worldObj.spawnEntityInWorld(creepsentitytrophy);
-    } */
 
-    /**
-     * Will get destroyed next tick.
-     */
-    
-    public void onDeath(DamageSource damagesource)
-    {
+    // Alla morte dell'entita
+    public void onDeath(DamageSource damagesource) {
     	super.onDeath(damagesource);
-    	EntityPlayerMP player = (EntityPlayerMP) damagesource.getEntity();
-    	if(player != null)
-    	{
-    		/* 
-        	if (!player.getStatFile().hasAchievementUnlocked(MoreCreepsAndWeirdos.achievegotohell))
-        	{
-        		
-        		// TODO worldObj.playSoundAtEntity(player, "morecreeps:achievement", 1.0F, 1.0F);
-        		// player.addStat(MoreCreepsAndWeirdos.achievegotohell, 1);
-        		// confetti(player);
-        	} */
-    	}
 
-    	if(!worldObj.isRemote)
-    	{
+    	if(!worldObj.isRemote) {
         	if (rand.nextInt(50) == 0)
-        	{
         		dropItem(Items.DIAMOND, rand.nextInt(2) + 1);
-        	}
 
         	if (rand.nextInt(50) == 0)
-        	{
         		entityDropItem(new ItemStack(Items.DYE, 1, 4), 1.0F);
-        	}
-
+        	
         	if (rand.nextInt(50) == 0)
-        	{
         		entityDropItem(new ItemStack(Items.DYE, 1, 3), 1.0F);
-        	}
-
+        
         	if (rand.nextInt(50) == 0)
-        	{
         		entityDropItem(new ItemStack(Items.DYE, 1, 1), 1.0F);
-        	}
-
+        	
         	if (rand.nextInt(2) == 0)
-        	{
         		dropItem(Items.GOLD_INGOT, rand.nextInt(5) + 2);
-        	}
-        	else
-        	{
+        	
+        	else {
         		dropItem(Items.BOOK, 1);
         		dropItem(Items.APPLE, 1);
         	}
