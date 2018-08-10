@@ -4,7 +4,16 @@ import com.rickweek.init.MCItems;
 import com.rickweek.init.MCSoundEvents;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,8 +41,7 @@ public class CREEPSEntityCastleGuard extends EntityMob
         "mcw:textures/entity/castleguard1.png", "mcw:textures/entity/castleguard2.png", "mcw:textures/entity/castleguard3.png", "mcw:textures/entity/castleguard4.png", "mcw:textures/entity/castleguard5.png"
     };
 
-    public CREEPSEntityCastleGuard(World world)
-    {
+    public CREEPSEntityCastleGuard(World world) {
         super(world);
         angerLevel = 0;
         randomSoundDelay = 0;
@@ -43,21 +51,38 @@ public class CREEPSEntityCastleGuard extends EntityMob
         hammerswing = 0.0F;
         modelsize = 1.0F;
         attackdamage = 1;
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 0.5D));
+        this.tasks.addTask(5, new CREEPSEntityCastleGuard.AIAttackTarget());
+        this.tasks.addTask(3, new EntityAIWander(this, 1.0D));
+        this.tasks.addTask(4, new EntityAILookIdle(this));
+        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+
     }
     
-    public void applyEntityAttributes()
-    {
+    public void applyEntityAttributes() {
     	super.applyEntityAttributes();
     	this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20D);
     	this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000005D);
     	this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D);
     }
-
+    
+    public boolean getSwinging()
+    {
+        return hammerswing != 0.0F;
+    }
+    
+    public float getHammerSwing()
+    {
+        return hammerswing;
+    }
+    
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate()
-    {
+    public void onUpdate() {
         if (hammerswing < 0.0F)
         {
             hammerswing += 0.45F;
@@ -70,11 +95,8 @@ public class CREEPSEntityCastleGuard extends EntityMob
         super.onUpdate();
     }
 
-    /**
-     * Will return how many at most can spawn in a chunk at once.
-     */
-    public int getMaxSpawnedInChunk()
-    {
+
+    public int getMaxSpawnedInChunk() {
         return 2;
     }
 
@@ -125,6 +147,7 @@ public class CREEPSEntityCastleGuard extends EntityMob
     {
         if (onGround)
         {
+        	
             double d = entity.posX - posX;
             double d2 = entity.posZ - posZ;
             float f1 = MathHelper.sqrt_double(d * d + d2 * d2);
@@ -132,6 +155,7 @@ public class CREEPSEntityCastleGuard extends EntityMob
             motionZ = (d2 / (double)f1) * 0.20000000000000001D * (0.52200000119209289D + motionZ * 0.20000000298023224D);
             motionY = 0.19500000596246447D;
             fallDistance = -25F;
+
         }
 
         if ((double)f > 3D && rand.nextInt(10) == 0)
@@ -141,7 +165,7 @@ public class CREEPSEntityCastleGuard extends EntityMob
             motionX += d1 * 0.10999999940395355D;
             motionZ += d3 * 0.10999999940395355D;
             motionY += 0.023000000044703484D;
-        }
+        } 
 
         if ((double)f < 2.2999999999999998D - (1.0D - (double)modelsize) && entity.getEntityBoundingBox().maxY > entity.getEntityBoundingBox().minY && entity.getEntityBoundingBox().minY < entity.getEntityBoundingBox().maxY && !(entity instanceof CREEPSEntityCastleGuard))
         {
@@ -150,21 +174,47 @@ public class CREEPSEntityCastleGuard extends EntityMob
                 hammerswing = -2.6F;
             }
 
-            //attackTime = 20;
             entity.attackEntityFrom(DamageSource.causeMobDamage(this), attackdamage);
         }
     }
+    
+    public class AIAttackTarget extends EntityAIBase {
 
-    private void becomeAngryAt(Entity entity)
-    {
+    	public CREEPSEntityCastleGuard castleguard = CREEPSEntityCastleGuard.this;
+    	public AIAttackTarget() {}
+    	
+		@Override
+		public boolean shouldExecute() {
+            EntityLivingBase entitylivingbase = this.castleguard.getAttackTarget();
+            return entitylivingbase != null && entitylivingbase.isEntityAlive();
+		}
+        public void updateTask()
+        {
+            EntityLivingBase entitylivingbase = this.castleguard.getAttackTarget();
+            double d0 = this.castleguard.getDistanceSqToEntity(entitylivingbase);
+
+            if (d0 < 4.0D) {
+            	this.castleguard.attackEntityAsMob(entitylivingbase);
+                this.castleguard.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0D);
+            }
+            else if (d0 < 256.0D) {
+            	castleguard.attackEntity(entitylivingbase, (float)d0);
+                this.castleguard.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
+            }
+            else {
+                this.castleguard.getNavigator().clearPathEntity();
+                this.castleguard.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 0.5D);
+            }
+        }
+    }
+
+    private void becomeAngryAt(Entity entity) {
         this.attackEntity(entity, 1);
         angerLevel = 400 + rand.nextInt(400);
         randomSoundDelay = rand.nextInt(40);
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
+    // Ritorna il danno riprodotto dal mob quando e vivo
     protected SoundEvent getLivingSound()
     {
         if (attacked && rand.nextInt(5) == 0)
@@ -182,32 +232,24 @@ public class CREEPSEntityCastleGuard extends EntityMob
         }
     }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
+    // Ritorna il danno riprodotto dal mob quando viene colpito
     protected SoundEvent getHurtSound()
     {
         return MCSoundEvents.ENTITY_CASTLEGUARD_HURT;
     }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
+    // Ritorna il danno riprodotto dal mob alla sua morte
     protected SoundEvent getDeathSound()
     {
     	return MCSoundEvents.ENTITY_CASTLEGUARD_DEATH;
     }
 
-    /**
-     * Called when the mob's health reaches 0.
-     */
-    public void onDeath(DamageSource damagesource)
-    {
+    // Alla morte dell'entita
+    public void onDeath(DamageSource damagesource) {
         super.onDeath(damagesource);
-
-        if (rand.nextInt(3) == 0)
-        {
-            dropItem(MCItems.Donut, rand.nextInt(2) + 1);
-        }
+        if(!worldObj.isRemote)
+            if (rand.nextInt(3) == 0) 
+                dropItem(MCItems.Donut, rand.nextInt(2) + 1);
+            
     }
 }

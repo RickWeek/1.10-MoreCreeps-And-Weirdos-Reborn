@@ -1,8 +1,11 @@
 package com.rickweek.models;
 
+import com.rickweek.entities.CREEPSEntityCastleGuard;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.math.MathHelper;
 
 public class CREEPSModelCastleGuard extends ModelBase
@@ -121,6 +124,21 @@ public class CREEPSModelCastleGuard extends ModelBase
         earR.render(f5);
         nose.render(f5);
     }
+    
+    public void setLivingAnimations(EntityLiving entityliving, float f, float f1, float f2)
+    {
+        CREEPSEntityCastleGuard creepsentitycastleguard = (CREEPSEntityCastleGuard)entityliving;
+
+        if (creepsentitycastleguard.getSwinging())
+        {
+            hammerHead.rotateAngleX = hammerHandle.rotateAngleX = bipedRightArm.rotateAngleX = creepsentitycastleguard.getHammerSwing();
+        }
+        else
+        {
+            hammerHead.rotateAngleX = hammerHandle.rotateAngleX = bipedRightArm.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+        }
+    }
+    
 
     /**
      * Sets the models various rotation angles.

@@ -30,8 +30,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public class CREEPSEntityHunchbackSkeleton extends EntityMob
-{
+public class CREEPSEntityHunchbackSkeleton extends EntityMob {
     private static final ItemStack defaultHeldItem;
     public boolean hasAttacked;
     public int weapon;
@@ -39,13 +38,10 @@ public class CREEPSEntityHunchbackSkeleton extends EntityMob
     public String ss;
     public float modelsize;
     public String texture;
-    public double health;
 
-    public CREEPSEntityHunchbackSkeleton(World world)
-    {
+    public CREEPSEntityHunchbackSkeleton(World world) {
         super(world);
         texture = "mcw:textures/entity/hunchbackskeleton1.png";
-        health = rand.nextInt(10) + 10;
         timeleft = rand.nextInt(500) + 200;
         modelsize = 1.0F;
         // ((PathNavigateGround)this.getNavigator()).func_179688_b(true);
@@ -58,50 +54,35 @@ public class CREEPSEntityHunchbackSkeleton extends EntityMob
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
     }
     
-    public void applyEntityAttributes()
-    {
+    public void applyEntityAttributes() {
     	super.applyEntityAttributes();
-    	this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(rand.nextInt(10) + 10);
+    	this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(rand.nextInt(15) + 5);
+    	this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
     }
 
     
 
-    public CREEPSEntityHunchbackSkeleton(World world, Entity entity, double d, double d1, double d2, boolean flag)
-    {
+    public CREEPSEntityHunchbackSkeleton(World world, Entity entity, double d, double d1, double d2, boolean flag) {
         this(world);
         setPosition(d, d1, d2);
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected SoundEvent getAmbientSound()
+    protected SoundEvent getAmbientSound() 
     {
         return SoundEvents.ENTITY_SKELETON_AMBIENT;
     }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
     protected SoundEvent getHurtSound()
     {
         return SoundEvents.ENTITY_SKELETON_HURT;
     }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
     protected SoundEvent getDeathSound()
     {
         return SoundEvents.ENTITY_SKELETON_HURT;
     }
 
-    /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
-     */
-    public void onLivingUpdate()
-    {
+    public void onLivingUpdate() {
         super.onLivingUpdate();
 
         if (rand.nextInt(2) == 0)
@@ -128,15 +109,10 @@ public class CREEPSEntityHunchbackSkeleton extends EntityMob
         else if (timeleft < 1)
         {
             smoke();
-            health = 0;
             setDead();
         }
     }
 
-    /**
-     * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
-     * (Animals, Spiders at day, peaceful PigZombies).
-     */
     protected Entity findPlayerToAttack()
     {
         EntityLiving entityliving = getClosestTarget(this, 16D);

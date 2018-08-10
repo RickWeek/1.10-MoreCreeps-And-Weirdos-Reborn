@@ -189,8 +189,7 @@ public class CREEPSEntityHunchback extends EntityMob
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
-    protected void attackEntity(Entity entity, float f)
-    {
+    protected void attackEntity(Entity entity, float f) {
         if (!(this.getAttackTarget() instanceof CREEPSEntityHunchbackSkeleton) /* && !(this.getAttackTarget() instanceof CREEPSEntityGuineaPig) && !(this.getAttackTarget() instanceof CREEPSEntityHotdog) */)
         {
             if (onGround)

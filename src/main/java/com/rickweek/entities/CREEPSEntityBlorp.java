@@ -26,15 +26,11 @@ import com.rickweek.entities.ai.EntityBlorpAI;
 import com.rickweek.init.MCItems;
 import com.rickweek.init.MCSoundEvents;
 
-public class CREEPSEntityBlorp extends EntityMob
-{
+public class CREEPSEntityBlorp extends EntityMob {
     public double attackrange;
     public boolean bone;
     protected int attack;
     public float blorpsize;
-
-    /** Entity motion Y */
-    //public String motionY;
     public int eaten;
     public boolean hungry;
     public int hungrytime;
@@ -43,8 +39,7 @@ public class CREEPSEntityBlorp extends EntityMob
     public String texture;
     public int attackTime;
 
-    public CREEPSEntityBlorp(World world)
-    {
+    public CREEPSEntityBlorp(World world) {
         super(world);
         bone = false;
         texture = "mcw:textures/entity/blorp.png";
@@ -64,53 +59,41 @@ public class CREEPSEntityBlorp extends EntityMob
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true, new Class[0]));
     }
 
-    public void applyEntityAttributes()
-    {
+    public void applyEntityAttributes() {
     	super.applyEntityAttributes();
     	this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25D);
     	this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000517232513D);
     	this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
     }
 
-    /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
-     */
-    public void onLivingUpdate()
-    {
-        if (blorpsize > 2.0F)
-        {
+
+    public void onLivingUpdate() {
+    	if (blorpsize > 2.0F) {
             ignoreFrustumCheck = true;
         }
 
         super.onLivingUpdate();
 
-        if (getAttackTarget() != null)
-        {
+        if (getAttackTarget() != null) {
             hungry = false;
             hungrytime = 100;
         }
 
-        if (hungry)
-        {
+        if (hungry) {
             int ai[] = findTree(this, Double.valueOf(2D));
 
-            if (ai[1] != 0)
-            {
+            if (ai[1] != 0) {
                 int i = ai[0];
                 int j = ai[1];
                 int k = ai[2];
-                // worldObj.playSoundAtEntity(this, "morecreeps:blorpeat", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
                 worldObj.playSound((EntityPlayer) null, getPosition(), MCSoundEvents.ENTITY_BLORP_EAT, SoundCategory.NEUTRAL, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
                 worldObj.setBlockToAir(new BlockPos(i, j, k));
                 hungrytime = hungrytime + rand.nextInt(100) + 25;
 
-                if (hungrytime > 1000)
-                {
+                if (hungrytime > 1000) {
                     hungry = false;
 
-                    if (blorpsize < 6F)
-                    {
+                    if (blorpsize < 6F) {
                         blorpsize = blorpsize + 0.3F;
                     }
 
@@ -119,7 +102,6 @@ public class CREEPSEntityBlorp extends EntityMob
                     float health = this.getHealth();
                     health = 10 * blorplevel + 25;
                     setSize(width * blorpsize, 2.0F + height * blorpsize);
-                    // worldObj.playSoundAtEntity(this, "morecreeps:blorpgrow", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
                     worldObj.playSound((EntityPlayer) null, getPosition(), MCSoundEvents.ENTITY_BLORP_GROW, SoundCategory.NEUTRAL, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
                 }
 
